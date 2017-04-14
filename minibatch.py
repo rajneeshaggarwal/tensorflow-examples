@@ -46,9 +46,10 @@ init = tf.global_variables_initializer()
 with tf.Session() as sess:
     sess.run(init)
     
-    # TODO: Train optimizer on all batches
-    # for batch_features, batch_labels in ______
-    sess.run(optimizer, feed_dict={features: batch_features, labels: batch_labels})
+    # Train optimizer on all batches
+    batches = batches(batch_size, train_features, train_labels)
+    for batch_features, batch_labels in batches:
+        sess.run(optimizer, feed_dict={features: batch_features, labels: batch_labels})
 
     # Calculate accuracy for test dataset
     test_accuracy = sess.run(
